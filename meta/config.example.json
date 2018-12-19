@@ -1,0 +1,12 @@
+{
+  "debug": true,
+  "puppeteer": {
+    "executablePath": "/usr/bin/google-chrome"
+  },
+  "lineNotify": {
+    "token": "token"
+  },
+  "cwb": {
+    "token": "token"
+  }
+}
