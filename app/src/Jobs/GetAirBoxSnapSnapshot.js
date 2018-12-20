@@ -1,4 +1,7 @@
 import puppeteer from 'puppeteer'
+import uuid from 'uuid/v4'
+import LineNotify from 'Components/LineNotify'
+import { readFileSync } from 'fs'
 class GetAirBoxSnapSnapshot {
   constructor() {
     this.screenShotPhotos = []
@@ -14,8 +17,8 @@ class GetAirBoxSnapSnapshot {
     await this._closeLightBox()
     await this._takeFullPageScreenshot()
     await this._takeTaichungScreenshot()
-    await this.page.waitFor(1000)
     await this._closeBrowser()
+    await this._sendPhotos()
   }
 
   async _launchBrowser() {
@@ -23,6 +26,7 @@ class GetAirBoxSnapSnapshot {
     this.browser = await puppeteer.launch({
       headless: appConfig.debug != true,
       executablePath: '/usr/bin/google-chrome',
+      ignoreHTTPSErrors: true,
       ...this.customOptions,
     })
   }
@@ -54,7 +58,7 @@ class GetAirBoxSnapSnapshot {
 
 
   async _takeFullPageScreenshot() {
-    const fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, `overview-${now()}.png`)
+    const fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, `overview-${uuid()}.png`)
     this.screenShotPhotos.push(fullPage)
     await this.page.screenshot({
       path: fullPage,
@@ -63,17 +67,17 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _takeTaichungScreenshot() {
-    const photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, `${now()}.png`)
+    const photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, `${uuid()}.png`)
     this.screenShotPhotos.push(photoPath)
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
-    await this.page.mouse.down()
-    await this.page.mouse.move(-200, -200)
-    await this.page.mouse.up()
+    await this._mouseDrag(800, 800)
+
     await this.page.screenshot({
       path: photoPath,
+      fullPage: true,
     })
     log(`截圖成功(台中): ${photoPath}`)
   }
@@ -84,10 +88,36 @@ class GetAirBoxSnapSnapshot {
     log('關閉瀏覽器', 'yellow')
   }
 
+  async _mouseDrag(x, y) {
+    const innerWidth = await this.page.evaluate(() => window.innerWidth)
+    const innerHeight = await this.page.evaluate(() => window.innerHeight)
+    const mouse = this.page.mouse
+    await mouse.move(innerWidth/2, innerHeight/2)
+    await mouse.down()
+    await mouse.move(innerWidth/2+x, innerHeight/2+y, {
+      steps: 100
+    })
+    await mouse.up()
+    await this.page.waitFor(500)
+  }
+
   async _zoomIn() {
     const zoomInSelector = 'button[aria-label="放大"]'
     await this.page.evaluate(zoomInSelector => { document.querySelector(zoomInSelector).click() }, zoomInSelector)
     await this.page.waitFor(500)
+  }
+
+  async _sendPhotos() {
+    this.lineNotify = LineNotify()
+    for(const photoPath of this.screenShotPhotos) {
+      log(`發送圖片: ${photoPath}`)
+      const photo = await readFileSync(photoPath)
+      console.log(typeof photo)
+      await this.lineNotify.send({
+        message: '截圖',
+        imageFile: photo,
+      })
+    }
   }
 }
 
