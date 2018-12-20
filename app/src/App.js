@@ -15,8 +15,6 @@ class App {
     try {
       const config = await readFileSync(args.config, 'utf8')
       global.appConfig = JSON.parse(config)
-      log(appConfig)
-      log(appConfig.debug)
     } catch(error) {
       log(`找不到config檔案`, 'red')
       process.exit()
