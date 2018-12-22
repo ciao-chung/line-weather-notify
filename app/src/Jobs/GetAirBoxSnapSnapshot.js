@@ -5,8 +5,8 @@ class GetAirBoxSnapSnapshot {
     this.screenShotPhotos = []
     this.url = 'https://airbox.edimaxcloud.com'
     this.baseViewPort = {
-      width: 1600,
-      height: 1200,
+      width: 500,
+      height: 800,
     }
   }
   async start() {
@@ -70,8 +70,7 @@ class GetAirBoxSnapSnapshot {
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
-    await this._zoomIn()
-    await this._mouseDrag(800, 800)
+    await this._mouseDrag(500, 400)
 
     await this.page.screenshot({
       path: photoPath,
