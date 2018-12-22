@@ -1,7 +1,5 @@
 import puppeteer from 'puppeteer'
 import uuid from 'uuid/v4'
-import LineNotify from 'Components/LineNotify'
-import { readFileSync } from 'fs'
 class GetAirBoxSnapSnapshot {
   constructor() {
     this.screenShotPhotos = []
@@ -108,16 +106,23 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _sendPhotos() {
-    this.lineNotify = LineNotify()
-    for(const photoPath of this.screenShotPhotos) {
-      log(`發送圖片: ${photoPath}`)
-      const photo = await readFileSync(photoPath)
-      console.log(typeof photo)
-      await this.lineNotify.send({
-        message: '截圖',
-        imageFile: photo,
-      })
+    const tokens = appConfig.lineNotify.token
+    for(const token of tokens) {
+      for(const photoPath of this.screenShotPhotos) {
+        log(`發送圖片: ${photoPath}\n`)
+        try {
+          await this._sendLineImageNotify(token, '截圖', photoPath)
+        } catch(error) {
+          log(error, 'red')
+        }
+        // await execAsync(`rm -rf ${photoPath}`)
+      }
     }
+  }
+
+  async _sendLineImageNotify(token, message, imageFilePath = null) {
+    await execAsync(`curl -XPOST -F "message=${message}" -F "imageFile=@${imageFilePath}" -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${token}" -i https://notify-api.line.me/api/notify`)
+    await execAsync(`sleep 1`)
   }
 }
 

@@ -5,7 +5,9 @@
     "screenShotStorePath": "/home/ciao/Desktop/weather"
   },
   "lineNotify": {
-    "token": "token"
+    "tokens": [
+      "token"
+    ]
   },
   "cwb": {
     "token": "token"
