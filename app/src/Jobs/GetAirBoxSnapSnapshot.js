@@ -57,7 +57,10 @@ class GetAirBoxSnapSnapshot {
 
   async _takeFullPageScreenshot() {
     const fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, `overview-${uuid()}.png`)
-    this.screenShotPhotos.push(fullPage)
+    this.screenShotPhotos.push({
+      title: `\n${now()}全台空氣品質`,
+      path: fullPage,
+    })
     await this.page.screenshot({
       path: fullPage,
     })
@@ -66,7 +69,10 @@ class GetAirBoxSnapSnapshot {
 
   async _takeTaichungScreenshot() {
     const photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, `${uuid()}.png`)
-    this.screenShotPhotos.push(photoPath)
+    this.screenShotPhotos.push({
+      title: `\n${now()}台中空氣品質`,
+      path: photoPath,
+    })
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
@@ -107,10 +113,10 @@ class GetAirBoxSnapSnapshot {
   async _sendPhotos() {
     const tokens = appConfig.lineNotify.token
     for(const token of tokens) {
-      for(const photoPath of this.screenShotPhotos) {
-        log(`發送圖片: ${photoPath}\n`)
+      for(const photo of this.screenShotPhotos) {
+        log(`發送圖片: ${photo.path}\n`)
         try {
-          await this._sendLineImageNotify(token, '截圖', photoPath)
+          await this._sendLineImageNotify(token, photo.title, photo.path)
         } catch(error) {
           log(error, 'red')
         }
