@@ -60278,17 +60278,18 @@ function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 this.customOptions = global.appConfig.puppeteer || {};
-                _context2.next = 3;
+                log('啟用Puppeteer瀏覽器');
+                _context2.next = 4;
                 return __WEBPACK_IMPORTED_MODULE_0_puppeteer___default.a.launch(_objectSpread({
                   headless: appConfig.debug != true,
                   executablePath: '/usr/bin/google-chrome',
                   ignoreHTTPSErrors: true
                 }, this.customOptions));
 
-              case 3:
+              case 4:
                 this.browser = _context2.sent;
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -60321,16 +60322,17 @@ function () {
                 return this.page.setViewport(this.baseViewPort);
 
               case 5:
-                _context3.next = 7;
+                log('導向空氣盒子');
+                _context3.next = 8;
                 return this.page.goto(this.url, {
                   waitUntil: 'networkidle0'
                 });
 
-              case 7:
-                _context3.next = 9;
+              case 8:
+                _context3.next = 10;
                 return this.page.waitFor(1000);
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -60355,34 +60357,35 @@ function () {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
+                log('關閉LightBox');
                 lightBoxCloseButton = 'div.bootbox>div.modal-dialog>div.modal-content>div.modal-body>button.bootbox-close-button.close';
-                _context4.prev = 1;
-                _context4.next = 4;
+                _context4.prev = 2;
+                _context4.next = 5;
                 return this.page.evaluate(function (lightBoxCloseButton) {
                   document.querySelector(lightBoxCloseButton).click();
                 }, lightBoxCloseButton);
 
-              case 4:
-                _context4.next = 11;
+              case 5:
+                _context4.next = 12;
                 break;
 
-              case 6:
-                _context4.prev = 6;
-                _context4.t0 = _context4["catch"](1);
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](2);
                 console.log(_context4.t0);
                 log('找不到lightbox', 'red');
                 return _context4.abrupt("return");
 
-              case 11:
-                _context4.next = 13;
+              case 12:
+                _context4.next = 14;
                 return this.page.waitFor(1000);
 
-              case 13:
+              case 14:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[1, 6]]);
+        }, _callee4, this, [[2, 7]]);
       }));
 
       function _closeLightBox() {

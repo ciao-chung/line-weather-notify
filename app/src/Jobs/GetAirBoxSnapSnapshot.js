@@ -21,6 +21,7 @@ class GetAirBoxSnapSnapshot {
 
   async _launchBrowser() {
     this.customOptions = global.appConfig.puppeteer || {}
+    log('啟用Puppeteer瀏覽器')
     this.browser = await puppeteer.launch({
       headless: appConfig.debug != true,
       executablePath: '/usr/bin/google-chrome',
@@ -32,6 +33,7 @@ class GetAirBoxSnapSnapshot {
   async _gotoAirBoxPage() {
     this.page = await this.browser.newPage()
     await this.page.setViewport(this.baseViewPort)
+    log('導向空氣盒子')
     await this.page.goto(this.url, {
       waitUntil: 'networkidle0',
     })
@@ -39,6 +41,7 @@ class GetAirBoxSnapSnapshot {
   }
 
   async  _closeLightBox() {
+    log('關閉LightBox')
     const lightBoxCloseButton = 'div.bootbox>div.modal-dialog>div.modal-content>div.modal-body>button.bootbox-close-button.close'
 
     try {
