@@ -35,6 +35,7 @@ class GetAirBoxSnapSnapshot {
     await this.page.setViewport(this.baseViewPort)
     log('導向空氣盒子')
     await this.page.goto(this.url, {
+      timeout: 40000,
       waitUntil: 'networkidle0',
     })
     await this.page.waitFor(1000)

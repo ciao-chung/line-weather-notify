@@ -60325,6 +60325,7 @@ function () {
                 log('導向空氣盒子');
                 _context3.next = 8;
                 return this.page.goto(this.url, {
+                  timeout: 40000,
                   waitUntil: 'networkidle0'
                 });
 
