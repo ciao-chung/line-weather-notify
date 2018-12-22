@@ -61,6 +61,9 @@ class GetAirBoxSnapSnapshot {
       title: `\n${now()}全台空氣品質`,
       path: fullPage,
     })
+
+    await this._mouseDrag(0, -100)
+
     await this.page.screenshot({
       path: fullPage,
     })
@@ -76,7 +79,7 @@ class GetAirBoxSnapSnapshot {
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
-    await this._mouseDrag(500, 400)
+    await this._mouseDrag(300, 200)
 
     await this.page.screenshot({
       path: photoPath,
@@ -98,7 +101,7 @@ class GetAirBoxSnapSnapshot {
     await mouse.move(innerWidth/2, innerHeight/2)
     await mouse.down()
     await mouse.move(innerWidth/2+x, innerHeight/2+y, {
-      steps: 100
+      steps: 10
     })
     await mouse.up()
     await this.page.waitFor(500)
@@ -111,16 +114,15 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _sendPhotos() {
-    const tokens = appConfig.lineNotify.token
-    for(const token of tokens) {
+    for(const token of appConfig.lineNotify.token) {
       for(const photo of this.screenShotPhotos) {
         log(`發送圖片: ${photo.path}\n`)
         try {
-          await this._sendLineImageNotify(token, photo.title, photo.path)
+          // await this._sendLineImageNotify(token, photo.title, photo.path)
         } catch(error) {
           log(error, 'red')
         }
-        // await execAsync(`rm -rf ${photoPath}`)
+        await execAsync(`rm -rf ${photo.path}`)
       }
     }
   }
