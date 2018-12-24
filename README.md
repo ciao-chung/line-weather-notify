@@ -17,32 +17,30 @@ node prod/line-weather-notify --config=/path/to/config/file
 
 ```json
 {
-  // 開啟debug模式, 開啟後puppeteer會關閉chrome的headless模式
   "debug": true,
-
   "puppeteer": {
-    // chrome的執行檔位置
     "executablePath": "/usr/bin/google-chrome",
-    
-    // 截圖暫存路徑
     "screenShotStorePath": "/foo/bar"
   },
-  
   "lineNotify": {
-    // Line Notify要通知的對象(可多個)
     "tokens": [
       "token"
     ]
   },
-  
-  // 氣象局API設定
   "cwb": {
     "token": "token"
   }
 }
 ```
 
-
+- debug(optional): Boolean, 開啟debug模式, 開啟後puppeteer會關閉chrome的headless模式, 預設為false
+- puppeteer:
+  - executablePath(optional): String, puppeteer的chrome的執行檔位置
+  - screenShotStorePath(required): String, 截圖暫存路徑
+- lineNotify:
+  - tokens(required): Array, Line Notify要通知的對象(可多個)
+- cwb: 中央氣象局API設定
+  - token(required): String, API token
 
 ## 功能
 
