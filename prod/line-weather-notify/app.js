@@ -60628,7 +60628,7 @@ function () {
       var _sendPhotos2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee10() {
-        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, token, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, photo;
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, photo, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, token;
 
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
@@ -60638,7 +60638,7 @@ function () {
                 _didIteratorError = false;
                 _iteratorError = undefined;
                 _context10.prev = 3;
-                _iterator = appConfig.lineNotify.token[Symbol.iterator]();
+                _iterator = this.screenShotPhotos[Symbol.iterator]();
 
               case 5:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
@@ -60646,21 +60646,21 @@ function () {
                   break;
                 }
 
-                token = _step.value;
+                photo = _step.value;
+                log("\u767C\u9001\u5716\u7247: ".concat(photo.path, "\n"));
                 _iteratorNormalCompletion2 = true;
                 _didIteratorError2 = false;
                 _iteratorError2 = undefined;
-                _context10.prev = 10;
-                _iterator2 = this.screenShotPhotos[Symbol.iterator]();
+                _context10.prev = 11;
+                _iterator2 = appConfig.lineNotify.token[Symbol.iterator]();
 
-              case 12:
+              case 13:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                  _context10.next = 28;
+                  _context10.next = 26;
                   break;
                 }
 
-                photo = _step2.value;
-                log("\u767C\u9001\u5716\u7247: ".concat(photo.path, "\n"));
+                token = _step2.value;
                 _context10.prev = 15;
                 _context10.next = 18;
                 return this._sendLineImageNotify(token, photo.title, photo.path);
@@ -60675,47 +60675,47 @@ function () {
                 log(_context10.t0, 'red');
 
               case 23:
-                _context10.next = 25;
-                return execAsync("rm -rf ".concat(photo.path));
-
-              case 25:
                 _iteratorNormalCompletion2 = true;
-                _context10.next = 12;
+                _context10.next = 13;
+                break;
+
+              case 26:
+                _context10.next = 32;
                 break;
 
               case 28:
-                _context10.next = 34;
-                break;
-
-              case 30:
-                _context10.prev = 30;
-                _context10.t1 = _context10["catch"](10);
+                _context10.prev = 28;
+                _context10.t1 = _context10["catch"](11);
                 _didIteratorError2 = true;
                 _iteratorError2 = _context10.t1;
 
-              case 34:
-                _context10.prev = 34;
-                _context10.prev = 35;
+              case 32:
+                _context10.prev = 32;
+                _context10.prev = 33;
 
                 if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
                   _iterator2.return();
                 }
 
-              case 37:
-                _context10.prev = 37;
+              case 35:
+                _context10.prev = 35;
 
                 if (!_didIteratorError2) {
-                  _context10.next = 40;
+                  _context10.next = 38;
                   break;
                 }
 
                 throw _iteratorError2;
 
-              case 40:
-                return _context10.finish(37);
+              case 38:
+                return _context10.finish(35);
 
-              case 41:
-                return _context10.finish(34);
+              case 39:
+                return _context10.finish(32);
+
+              case 40:
+                _context10.next = 42;
+                return execAsync("rm -rf ".concat(photo.path));
 
               case 42:
                 _iteratorNormalCompletion = true;
@@ -60761,7 +60761,7 @@ function () {
                 return _context10.stop();
             }
           }
-        }, _callee10, this, [[3, 47, 51, 59], [10, 30, 34, 42], [15, 20], [35,, 37, 41], [52,, 54, 58]]);
+        }, _callee10, this, [[3, 47, 51, 59], [11, 28, 32, 40], [15, 20], [33,, 35, 39], [52,, 54, 58]]);
       }));
 
       function _sendPhotos() {
