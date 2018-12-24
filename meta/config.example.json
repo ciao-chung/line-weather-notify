@@ -2,7 +2,7 @@
   "debug": true,
   "puppeteer": {
     "executablePath": "/usr/bin/google-chrome",
-    "screenShotStorePath": "/home/ciao/Desktop/weather"
+    "screenShotStorePath": "/foo/bar"
   },
   "lineNotify": {
     "tokens": [

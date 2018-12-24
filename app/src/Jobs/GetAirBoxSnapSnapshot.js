@@ -132,7 +132,7 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _sendLineImageNotify(token, message, imageFilePath = null) {
-    await execAsync(`curl -XPOST -F "message=${message}" -F "imageFile=@${imageFilePath}" -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${token}" -i https://notify-api.line.me/api/notify`)
+    await execAsync(`curl -XPOST -F "message=${message}" -F "imageFile=@${imageFilePath}" -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${token}" -i https://notify-api.line.me/api/notify`, {}, true)
     await execAsync(`sleep 1`)
   }
 }

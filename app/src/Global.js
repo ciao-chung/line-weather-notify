@@ -34,13 +34,13 @@ class Global {
     return moment(new Date).format('YYYY-MM-DD HH:mm:ss')
   }
 
-  execAsync(command, options = {}) {
+  execAsync(command, options = {}, quiet = false) {
     let computedOptions = {
       async: true,
       ...options,
     }
 
-    log(`RUN: ${command}`)
+    if(!quiet) log(`RUN: ${command}`)
     if(options.cwd) log(`cwd: ${options.cwd}`)
 
     return new Promise((resolve, reject) => {
