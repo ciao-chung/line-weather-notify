@@ -118,16 +118,16 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _sendPhotos() {
-    for(const token of appConfig.lineNotify.token) {
-      for(const photo of this.screenShotPhotos) {
-        log(`發送圖片: ${photo.path}\n`)
+    for(const photo of this.screenShotPhotos) {
+      log(`發送圖片: ${photo.path}\n`)
+      for(const token of appConfig.lineNotify.token) {
         try {
           await this._sendLineImageNotify(token, photo.title, photo.path)
         } catch(error) {
           log(error, 'red')
         }
-        await execAsync(`rm -rf ${photo.path}`)
       }
+      await execAsync(`rm -rf ${photo.path}`)
     }
   }
 
