@@ -11,6 +11,10 @@
 node prod/line-weather-notify --config=/path/to/config/file
 ```
 
+透過cron tab可以設定成固定時間通知
+
+或是使用我開發的[cron-service](https://github.com/ciao-chung/cron-service)來設定
+
 ## JSON設定檔說明
 
 > 範例可參考meta/config.example.json
