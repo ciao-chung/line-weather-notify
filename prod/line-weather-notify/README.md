@@ -58,8 +58,8 @@ node prod/line-weather-notify --config=/path/to/config/file
 
 接著透過curl使用[Line Notify API](https://notify-bot.line.me/doc/en/)將截圖發送出去
 
-以下是開啟debug模式中執行截圖的Demo影片
+是開啟debug模式中執行截圖的[Demo影片](https://youtu.be/ZzRQTEWbX0c)
 
 可以清楚的看到puppeteer操作chrome的過程
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZzRQTEWbX0c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Demo影片](https://youtu.be/ZzRQTEWbX0c)
