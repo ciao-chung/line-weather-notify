@@ -58,18 +58,28 @@ node prod/line-weather-notify --config=/path/to/config/file
 {
   "title": "台中",
   "dataset": "F-D0047-073",
-  "towns": ["太平區", "北屯區"]
+  "towns": ["太平區", "北屯區"],
+  "data": {
+    "AT": true,
+    "PoP6h": true
+  }
 }
 ```
 
 - title(optional): String, 縣市名稱, 單純為了開發方便, 因為只用dataset不容易辨認縣市
 - dataset(required): String, 鄉鎮預報的資料集編號, 所有資料集編號請詳見[中央氣象局開放資料平臺之資料擷取API](https://opendata.cwb.gov.tw/dist/opendata-swagger.html)
 - towns(required): Array, 要做預報的鄉鎮名稱陣列, 各縣市的鄉鎮名稱請參考[中央氣象局文件](https://opendata.cwb.gov.tw/opendatadoc/CWB_Opendata_API_V1.2.pdf )的**附錄A『全臺縣市鄉鎮對照表』**
-
+- data(optional): Object, 要呈現的氣象資料屬性, 預設為全部呈現, 以下為可用的氣象資料屬性
+  - Wx: 天氣現象
+  - WeatherDescription: 天氣預報綜合描述
+  - AT: 體感溫度
+  - PoP6h: 6小時降雨機率 
+  - PoP12h: 12小時降雨機率 
 
 ## 功能
 
 - 空氣盒子截圖(全台、台中)
+- 鄉鎮氣象預報
 
 ![Demo](https://goo.gl/25kkun)
 
