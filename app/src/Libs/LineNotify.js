@@ -15,7 +15,7 @@ class LineNotify {
     curlCommand += `-H "Authorization: Bearer ${token}" `
     curlCommand += `-F "message=${message}" `
     if(imageFilePath) curlCommand += `-F "imageFile=@${imageFilePath}" `
-    await execAsync(curlCommand, {}, false)
+    await execAsync(curlCommand, {}, true)
     await execAsync(`sleep 0.5`)
   }
 }
