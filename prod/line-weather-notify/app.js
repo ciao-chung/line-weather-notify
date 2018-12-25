@@ -48528,7 +48528,7 @@ function () {
                 curlCommand += "-F \"message=".concat(message, "\" ");
                 if (imageFilePath) curlCommand += "-F \"imageFile=@".concat(imageFilePath, "\" ");
                 _context2.next = 8;
-                return execAsync(curlCommand, {}, false);
+                return execAsync(curlCommand, {}, true);
 
               case 8:
                 _context2.next = 10;
@@ -97370,17 +97370,20 @@ function (_BaseCwbLibs) {
       var _fetch = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dataset, townsArray) {
-        var towns, index, town, city, responseData, locations;
+        var towns, index, town, city, responseData, reOrderLocations, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step, _ret, locations;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // 組氣象局API要用的鄉鎮字串
                 towns = '';
 
                 for (index in townsArray) {
                   town = townsArray[index];
                   if (index == 0) towns = town;else towns += ",".concat(town);
-                }
+                } // 抓氣象局資料
+
 
                 _context.prev = 2;
                 _context.next = 5;
@@ -97402,28 +97405,103 @@ function (_BaseCwbLibs) {
                 return _context.abrupt("return", null);
 
               case 13:
+                // 讓鄉鎮的訊息排序可以跟JSON設定檔中的一樣
+                reOrderLocations = [];
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context.prev = 17;
+
+                _loop = function _loop() {
+                  var town = _step.value;
+                  var location = city.location.find(function (location) {
+                    return location.locationName == town;
+                  });
+                  if (!location) return "continue";
+                  reOrderLocations.push(location);
+                };
+
+                _iterator = townsArray[Symbol.iterator]();
+
+              case 20:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context.next = 27;
+                  break;
+                }
+
+                _ret = _loop();
+
+                if (!(_ret === "continue")) {
+                  _context.next = 24;
+                  break;
+                }
+
+                return _context.abrupt("continue", 24);
+
+              case 24:
+                _iteratorNormalCompletion = true;
+                _context.next = 20;
+                break;
+
+              case 27:
+                _context.next = 33;
+                break;
+
+              case 29:
+                _context.prev = 29;
+                _context.t1 = _context["catch"](17);
+                _didIteratorError = true;
+                _iteratorError = _context.t1;
+
+              case 33:
+                _context.prev = 33;
+                _context.prev = 34;
+
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                  _iterator.return();
+                }
+
+              case 36:
+                _context.prev = 36;
+
+                if (!_didIteratorError) {
+                  _context.next = 39;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 39:
+                return _context.finish(36);
+
+              case 40:
+                return _context.finish(33);
+
+              case 41:
+                city.location = reOrderLocations; // 把氣象局的資料再整理過一次
+
                 locations = city.location.map(function (location) {
                   var newElements = {};
-                  var _iteratorNormalCompletion = true;
-                  var _didIteratorError = false;
-                  var _iteratorError = undefined;
+                  var _iteratorNormalCompletion2 = true;
+                  var _didIteratorError2 = false;
+                  var _iteratorError2 = undefined;
 
                   try {
-                    for (var _iterator = location.weatherElement[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                      var element = _step.value;
+                    for (var _iterator2 = location.weatherElement[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                      var element = _step2.value;
                       newElements[element.elementName] = element;
                     }
                   } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
                   } finally {
                     try {
-                      if (!_iteratorNormalCompletion && _iterator.return != null) {
-                        _iterator.return();
+                      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                        _iterator2.return();
                       }
                     } finally {
-                      if (_didIteratorError) {
-                        throw _iteratorError;
+                      if (_didIteratorError2) {
+                        throw _iteratorError2;
                       }
                     }
                   }
@@ -97436,12 +97514,12 @@ function (_BaseCwbLibs) {
                   towns: locations
                 });
 
-              case 15:
+              case 44:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[2, 9]]);
+        }, _callee, this, [[2, 9], [17, 29, 33, 41], [34,, 36, 40]]);
       }));
 
       function fetch(_x, _x2) {
