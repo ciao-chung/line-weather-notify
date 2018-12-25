@@ -32,6 +32,10 @@ node prod/line-weather-notify --config=/path/to/config/file
     ]
   },
   "cwb": {
+    "city": [
+      cityItem,
+      cityItem,
+    ],
     "token": "token"
   }
 }
@@ -44,7 +48,24 @@ node prod/line-weather-notify --config=/path/to/config/file
 - lineNotify:
   - tokens(required): Array, Line Notify要通知的對象(可多個)
 - cwb: 中央氣象局API設定
+  - city: Array, cityItem陣列, 設定需要做預報的縣市及其鄉鎮
   - token(required): String, API token
+
+
+**cityItem**
+
+```json
+{
+  "title": "台中",
+  "dataset": "F-D0047-073",
+  "towns": ["太平區", "北屯區"]
+}
+```
+
+- title(optional): String, 縣市名稱, 單純為了開發方便, 因為只用dataset不容易辨認縣市
+- dataset(required): String, 鄉鎮預報的資料集編號, 所有資料集編號請詳見[中央氣象局開放資料平臺之資料擷取API](https://opendata.cwb.gov.tw/dist/opendata-swagger.html)
+- towns(required): Array, 要做預報的鄉鎮名稱陣列, 各縣市的鄉鎮名稱請參考[中央氣象局文件](https://opendata.cwb.gov.tw/opendatadoc/CWB_Opendata_API_V1.2.pdf )的**附錄A『全臺縣市鄉鎮對照表』**
+
 
 ## 功能
 
