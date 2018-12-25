@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer'
 import uuid from 'uuid/v4'
+import moment from "moment/moment"
+import LineNotify from 'Libs/LineNotify'
 class GetAirBoxSnapSnapshot {
   constructor() {
     this.screenShotPhotos = []
@@ -17,6 +19,10 @@ class GetAirBoxSnapSnapshot {
     await this._takeTaichungScreenshot()
     await this._closeBrowser()
     await this._sendPhotos()
+  }
+
+  _getComputedTime(time) {
+    return moment(time).format('YYYY/MM/DD HH:mm')
   }
 
   async _launchBrowser() {
@@ -62,7 +68,7 @@ class GetAirBoxSnapSnapshot {
   async _takeFullPageScreenshot() {
     const fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, `overview-${uuid()}.png`)
     this.screenShotPhotos.push({
-      title: `\n${now()}全台空氣品質`,
+      title: `\n${this._getComputedTime(now())}全台空氣品質`,
       path: fullPage,
     })
 
@@ -77,13 +83,13 @@ class GetAirBoxSnapSnapshot {
   async _takeTaichungScreenshot() {
     const photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, `${uuid()}.png`)
     this.screenShotPhotos.push({
-      title: `\n${now()}台中空氣品質`,
+      title: `\n${this._getComputedTime(now())}台中空氣品質`,
       path: photoPath,
     })
     await this._zoomIn()
     await this._zoomIn()
     await this._zoomIn()
-    await this._mouseDrag(210, 465)
+    await this._mouseDrag(210, 470)
 
     await this.page.screenshot({
       path: photoPath,
@@ -120,20 +126,9 @@ class GetAirBoxSnapSnapshot {
   async _sendPhotos() {
     for(const photo of this.screenShotPhotos) {
       log(`發送圖片: ${photo.path}\n`)
-      for(const token of appConfig.lineNotify.token) {
-        try {
-          await this._sendLineImageNotify(token, photo.title, photo.path)
-        } catch(error) {
-          log(error, 'red')
-        }
-      }
+      await LineNotify.send(photo.title, photo.path)
       await execAsync(`rm -rf ${photo.path}`)
     }
-  }
-
-  async _sendLineImageNotify(token, message, imageFilePath = null) {
-    await execAsync(`curl -XPOST -F "message=${message}" -F "imageFile=@${imageFilePath}" -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${token}" -i https://notify-api.line.me/api/notify`, {}, true)
-    await execAsync(`sleep 1`)
   }
 }
 

@@ -1,6 +1,7 @@
 import 'Global'
 import { readFileSync } from 'fs'
 import GetAirBoxSnapSnapshot from 'Jobs/GetAirBoxSnapSnapshot'
+import GetCwbData from 'Jobs/GetCwbData'
 class App {
   constructor() {
     this.start()
@@ -9,6 +10,7 @@ class App {
   async start() {
     await this.setupConfig()
     await GetAirBoxSnapSnapshot.start()
+    await GetCwbData.start()
   }
 
   async setupConfig() {
