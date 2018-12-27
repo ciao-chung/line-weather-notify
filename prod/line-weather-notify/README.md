@@ -2,6 +2,9 @@
 
 > 開發給家人群組用的氣象通知
 
+## Demo影片
+
+[Demo影片](https://www.youtube.com/watch?v=4YhCE8Zn9-I)
 
 ## 執行
 
@@ -120,8 +123,6 @@ node prod/line-weather-notify --config=/path/to/config/file
 以下是開啟debug模式中執行截圖的**Demo影片**
 
 可以清楚的看到puppeteer操作chrome的過程
-
-[Demo影片](https://youtu.be/ZzRQTEWbX0c)
 
 ## 鄉鎮氣象預報
 
