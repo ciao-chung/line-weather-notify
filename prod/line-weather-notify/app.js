@@ -55665,10 +55665,6 @@ function () {
                 return __WEBPACK_IMPORTED_MODULE_2_Jobs_GetAirBoxSnapSnapshot__["a" /* default */].start();
 
               case 4:
-                _context.next = 6;
-                return __WEBPACK_IMPORTED_MODULE_3_Jobs_GetCwbData__["a" /* default */].start();
-
-              case 6:
               case "end":
                 return _context.stop();
             }
@@ -61772,6 +61768,8 @@ function () {
       var _start = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee() {
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -61788,27 +61786,75 @@ function () {
                 return this._closeLightBox();
 
               case 6:
-                _context.next = 8;
-                return this._takeFullPageScreenshot();
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context.prev = 9;
+                _iterator = appConfig.airbox.screenshot[Symbol.iterator]();
 
-              case 8:
-                _context.next = 10;
-                return this._takeTaichungScreenshot();
+              case 11:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context.next = 18;
+                  break;
+                }
 
-              case 10:
-                _context.next = 12;
+                item = _step.value;
+                _context.next = 15;
+                return this._takeScreenshot(item);
+
+              case 15:
+                _iteratorNormalCompletion = true;
+                _context.next = 11;
+                break;
+
+              case 18:
+                _context.next = 24;
+                break;
+
+              case 20:
+                _context.prev = 20;
+                _context.t0 = _context["catch"](9);
+                _didIteratorError = true;
+                _iteratorError = _context.t0;
+
+              case 24:
+                _context.prev = 24;
+                _context.prev = 25;
+
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                  _iterator.return();
+                }
+
+              case 27:
+                _context.prev = 27;
+
+                if (!_didIteratorError) {
+                  _context.next = 30;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 30:
+                return _context.finish(27);
+
+              case 31:
+                return _context.finish(24);
+
+              case 32:
+                _context.next = 34;
                 return this._closeBrowser();
 
-              case 12:
-                _context.next = 14;
+              case 34:
+                _context.next = 36;
                 return this._sendPhotos();
 
-              case 14:
+              case 36:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, this, [[9, 20, 24, 32], [25,, 27, 31]]);
       }));
 
       function start() {
@@ -61951,117 +61997,144 @@ function () {
       return _closeLightBox;
     }()
   }, {
-    key: "_takeFullPageScreenshot",
+    key: "_takeScreenshot",
     value: function () {
-      var _takeFullPageScreenshot2 = _asyncToGenerator(
+      var _takeScreenshot2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5() {
-        var fullPage;
+      regeneratorRuntime.mark(function _callee5(item) {
+        var _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, action, screenshotFilePath;
+
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, "overview-".concat(__WEBPACK_IMPORTED_MODULE_1_uuid_v4___default()(), ".png"));
-                this.screenShotPhotos.push({
-                  title: "\n".concat(this._getComputedTime(now()), "\u5168\u53F0\u7A7A\u6C23\u54C1\u8CEA"),
-                  path: fullPage
-                });
-                _context5.next = 4;
-                return this._mouseDrag(0, -100);
+                if (!Array.isArray(item.actions)) {
+                  _context5.next = 33;
+                  break;
+                }
 
-              case 4:
-                _context5.next = 6;
-                return this.page.screenshot({
-                  path: fullPage
-                });
+                _iteratorNormalCompletion2 = true;
+                _didIteratorError2 = false;
+                _iteratorError2 = undefined;
+                _context5.prev = 4;
+                _iterator2 = item.actions[Symbol.iterator]();
 
               case 6:
-                log("\u622A\u5716\u6210\u529F(\u6574\u9801): ".concat(fullPage));
+                if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                  _context5.next = 19;
+                  break;
+                }
 
-              case 7:
+                action = _step2.value;
+
+                if (!(action == '+' || action == '-')) {
+                  _context5.next = 12;
+                  break;
+                }
+
+                _context5.next = 11;
+                return this._zoom(action);
+
+              case 11:
+                return _context5.abrupt("continue", 16);
+
+              case 12:
+                if (!Array.isArray(action)) {
+                  _context5.next = 16;
+                  break;
+                }
+
+                _context5.next = 15;
+                return this._mouseDrag(action[0], action[1]);
+
+              case 15:
+                return _context5.abrupt("continue", 16);
+
+              case 16:
+                _iteratorNormalCompletion2 = true;
+                _context5.next = 6;
+                break;
+
+              case 19:
+                _context5.next = 25;
+                break;
+
+              case 21:
+                _context5.prev = 21;
+                _context5.t0 = _context5["catch"](4);
+                _didIteratorError2 = true;
+                _iteratorError2 = _context5.t0;
+
+              case 25:
+                _context5.prev = 25;
+                _context5.prev = 26;
+
+                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                  _iterator2.return();
+                }
+
+              case 28:
+                _context5.prev = 28;
+
+                if (!_didIteratorError2) {
+                  _context5.next = 31;
+                  break;
+                }
+
+                throw _iteratorError2;
+
+              case 31:
+                return _context5.finish(28);
+
+              case 32:
+                return _context5.finish(25);
+
+              case 33:
+                screenshotFilePath = pathResolve(appConfig.puppeteer.screenShotStorePath, "line-weather-notify-screenshot-".concat(__WEBPACK_IMPORTED_MODULE_1_uuid_v4___default()(), ".png"));
+                this.screenShotPhotos.push({
+                  title: "\n".concat(this._getComputedTime(now()), " ").concat(item.location, "\u7A7A\u6C23\u54C1\u8CEA"),
+                  path: screenshotFilePath
+                });
+                _context5.next = 37;
+                return this.page.screenshot({
+                  path: screenshotFilePath,
+                  fullPage: true
+                });
+
+              case 37:
+                log("\u622A\u5716\u6210\u529F(".concat(item.location, "): ").concat(screenshotFilePath));
+                _context5.next = 40;
+                return this.page.waitFor(500);
+
+              case 40:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee5, this, [[4, 21, 25, 33], [26,, 28, 32]]);
       }));
 
-      function _takeFullPageScreenshot() {
-        return _takeFullPageScreenshot2.apply(this, arguments);
+      function _takeScreenshot(_x) {
+        return _takeScreenshot2.apply(this, arguments);
       }
 
-      return _takeFullPageScreenshot;
-    }()
-  }, {
-    key: "_takeTaichungScreenshot",
-    value: function () {
-      var _takeTaichungScreenshot2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee6() {
-        var photoPath;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, "".concat(__WEBPACK_IMPORTED_MODULE_1_uuid_v4___default()(), ".png"));
-                this.screenShotPhotos.push({
-                  title: "\n".concat(this._getComputedTime(now()), "\u53F0\u4E2D\u7A7A\u6C23\u54C1\u8CEA"),
-                  path: photoPath
-                });
-                _context6.next = 4;
-                return this._zoomIn();
-
-              case 4:
-                _context6.next = 6;
-                return this._zoomIn();
-
-              case 6:
-                _context6.next = 8;
-                return this._zoomIn();
-
-              case 8:
-                _context6.next = 10;
-                return this._mouseDrag(210, 470);
-
-              case 10:
-                _context6.next = 12;
-                return this.page.screenshot({
-                  path: photoPath,
-                  fullPage: true
-                });
-
-              case 12:
-                log("\u622A\u5716\u6210\u529F(\u53F0\u4E2D): ".concat(photoPath));
-
-              case 13:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-
-      function _takeTaichungScreenshot() {
-        return _takeTaichungScreenshot2.apply(this, arguments);
-      }
-
-      return _takeTaichungScreenshot;
+      return _takeScreenshot;
     }()
   }, {
     key: "_closeBrowser",
     value: function () {
       var _closeBrowser2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee7() {
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      regeneratorRuntime.mark(function _callee6() {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context7.next = 2;
+                _context6.next = 2;
                 return this.page.close();
 
               case 2:
-                _context7.next = 4;
+                _context6.next = 4;
                 return this.browser.close();
 
               case 4:
@@ -62069,10 +62142,10 @@ function () {
 
               case 5:
               case "end":
-                return _context7.stop();
+                return _context6.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee6, this);
       }));
 
       function _closeBrowser() {
@@ -62086,49 +62159,89 @@ function () {
     value: function () {
       var _mouseDrag2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee8(x, y) {
+      regeneratorRuntime.mark(function _callee7(x, y) {
         var innerWidth, innerHeight, mouse;
-        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                _context8.next = 2;
+                _context7.next = 2;
                 return this.page.evaluate(function () {
                   return window.innerWidth;
                 });
 
               case 2:
-                innerWidth = _context8.sent;
-                _context8.next = 5;
+                innerWidth = _context7.sent;
+                _context7.next = 5;
                 return this.page.evaluate(function () {
                   return window.innerHeight;
                 });
 
               case 5:
-                innerHeight = _context8.sent;
+                innerHeight = _context7.sent;
                 mouse = this.page.mouse;
-                _context8.next = 9;
+                _context7.next = 9;
                 return mouse.move(innerWidth / 2, innerHeight / 2);
 
               case 9:
-                _context8.next = 11;
+                _context7.next = 11;
                 return mouse.down();
 
               case 11:
-                _context8.next = 13;
+                _context7.next = 13;
                 return mouse.move(innerWidth / 2 + x, innerHeight / 2 + y, {
                   steps: 10
                 });
 
               case 13:
-                _context8.next = 15;
+                _context7.next = 15;
                 return mouse.up();
 
               case 15:
-                _context8.next = 17;
+                _context7.next = 17;
                 return this.page.waitFor(500);
 
               case 17:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function _mouseDrag(_x2, _x3) {
+        return _mouseDrag2.apply(this, arguments);
+      }
+
+      return _mouseDrag;
+    }()
+  }, {
+    key: "_zoom",
+    value: function () {
+      var _zoom2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee8() {
+        var type,
+            label,
+            zoomInSelector,
+            _args8 = arguments;
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                type = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : '+';
+                label = type == '-' ? '縮小' : '放大';
+                zoomInSelector = "button[aria-label=\"".concat(label, "\"]");
+                _context8.next = 5;
+                return this.page.evaluate(function (zoomInSelector) {
+                  document.querySelector(zoomInSelector).click();
+                }, zoomInSelector);
+
+              case 5:
+                _context8.next = 7;
+                return this.page.waitFor(500);
+
+              case 7:
               case "end":
                 return _context8.stop();
             }
@@ -62136,125 +62249,90 @@ function () {
         }, _callee8, this);
       }));
 
-      function _mouseDrag(_x, _x2) {
-        return _mouseDrag2.apply(this, arguments);
+      function _zoom() {
+        return _zoom2.apply(this, arguments);
       }
 
-      return _mouseDrag;
-    }()
-  }, {
-    key: "_zoomIn",
-    value: function () {
-      var _zoomIn2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee9() {
-        var zoomInSelector;
-        return regeneratorRuntime.wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                zoomInSelector = 'button[aria-label="放大"]';
-                _context9.next = 3;
-                return this.page.evaluate(function (zoomInSelector) {
-                  document.querySelector(zoomInSelector).click();
-                }, zoomInSelector);
-
-              case 3:
-                _context9.next = 5;
-                return this.page.waitFor(500);
-
-              case 5:
-              case "end":
-                return _context9.stop();
-            }
-          }
-        }, _callee9, this);
-      }));
-
-      function _zoomIn() {
-        return _zoomIn2.apply(this, arguments);
-      }
-
-      return _zoomIn;
+      return _zoom;
     }()
   }, {
     key: "_sendPhotos",
     value: function () {
       var _sendPhotos2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee10() {
-        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, photo;
+      regeneratorRuntime.mark(function _callee9() {
+        var _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, photo;
 
-        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                _iteratorNormalCompletion = true;
-                _didIteratorError = false;
-                _iteratorError = undefined;
-                _context10.prev = 3;
-                _iterator = this.screenShotPhotos[Symbol.iterator]();
+                _iteratorNormalCompletion3 = true;
+                _didIteratorError3 = false;
+                _iteratorError3 = undefined;
+                _context9.prev = 3;
+                _iterator3 = this.screenShotPhotos[Symbol.iterator]();
 
               case 5:
-                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context10.next = 15;
+                if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
+                  _context9.next = 15;
                   break;
                 }
 
-                photo = _step.value;
+                photo = _step3.value;
                 log("\u767C\u9001\u5716\u7247: ".concat(photo.path, "\n"));
-                _context10.next = 10;
+                _context9.next = 10;
                 return __WEBPACK_IMPORTED_MODULE_3_Libs_LineNotify__["a" /* default */].send(photo.title, photo.path);
 
               case 10:
-                _context10.next = 12;
+                _context9.next = 12;
                 return execAsync("rm -rf ".concat(photo.path));
 
               case 12:
-                _iteratorNormalCompletion = true;
-                _context10.next = 5;
+                _iteratorNormalCompletion3 = true;
+                _context9.next = 5;
                 break;
 
               case 15:
-                _context10.next = 21;
+                _context9.next = 21;
                 break;
 
               case 17:
-                _context10.prev = 17;
-                _context10.t0 = _context10["catch"](3);
-                _didIteratorError = true;
-                _iteratorError = _context10.t0;
+                _context9.prev = 17;
+                _context9.t0 = _context9["catch"](3);
+                _didIteratorError3 = true;
+                _iteratorError3 = _context9.t0;
 
               case 21:
-                _context10.prev = 21;
-                _context10.prev = 22;
+                _context9.prev = 21;
+                _context9.prev = 22;
 
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                  _iterator.return();
+                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                  _iterator3.return();
                 }
 
               case 24:
-                _context10.prev = 24;
+                _context9.prev = 24;
 
-                if (!_didIteratorError) {
-                  _context10.next = 27;
+                if (!_didIteratorError3) {
+                  _context9.next = 27;
                   break;
                 }
 
-                throw _iteratorError;
+                throw _iteratorError3;
 
               case 27:
-                return _context10.finish(24);
+                return _context9.finish(24);
 
               case 28:
-                return _context10.finish(21);
+                return _context9.finish(21);
 
               case 29:
               case "end":
-                return _context10.stop();
+                return _context9.stop();
             }
           }
-        }, _callee10, this, [[3, 17, 21, 29], [22,, 24, 28]]);
+        }, _callee9, this, [[3, 17, 21, 29], [22,, 24, 28]]);
       }));
 
       function _sendPhotos() {
@@ -97321,7 +97399,7 @@ function () {
   return GetCwbData;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (new GetCwbData());
+/* unused harmony default export */ var _unused_webpack_default_export = (new GetCwbData());
 
 /***/ }),
 /* 690 */

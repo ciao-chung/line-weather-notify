@@ -15,8 +15,10 @@ class GetAirBoxSnapSnapshot {
     await this._launchBrowser()
     await this._gotoAirBoxPage()
     await this._closeLightBox()
-    await this._takeFullPageScreenshot()
-    await this._takeTaichungScreenshot()
+    for(const item of appConfig.airbox.screenshot) {
+      await this._takeScreenshot(item)
+    }
+
     await this._closeBrowser()
     await this._sendPhotos()
   }
@@ -64,38 +66,34 @@ class GetAirBoxSnapSnapshot {
     await this.page.waitFor(1000)
   }
 
+  async _takeScreenshot(item) {
+    if(Array.isArray(item.actions)) {
+      for(const action of item.actions) {
+        if(action == '+' || action == '-') {
+          await this._zoom(action)
+          continue
+        }
 
-  async _takeFullPageScreenshot() {
-    const fullPage = pathResolve(appConfig.puppeteer.screenShotStorePath, `overview-${uuid()}.png`)
+        if(Array.isArray(action)) {
+          await this._mouseDrag(action[0], action[1])
+          continue
+        }
+      }
+    }
+
+    const screenshotFilePath = pathResolve(appConfig.puppeteer.screenShotStorePath, `line-weather-notify-screenshot-${uuid()}.png`)
     this.screenShotPhotos.push({
-      title: `\n${this._getComputedTime(now())}全台空氣品質`,
-      path: fullPage,
+      title: `\n${this._getComputedTime(now())} ${item.location}空氣品質`,
+      path: screenshotFilePath,
     })
-
-    await this._mouseDrag(0, -100)
 
     await this.page.screenshot({
-      path: fullPage,
-    })
-    log(`截圖成功(整頁): ${fullPage}`)
-  }
-
-  async _takeTaichungScreenshot() {
-    const photoPath = pathResolve(appConfig.puppeteer.screenShotStorePath, `${uuid()}.png`)
-    this.screenShotPhotos.push({
-      title: `\n${this._getComputedTime(now())}台中空氣品質`,
-      path: photoPath,
-    })
-    await this._zoomIn()
-    await this._zoomIn()
-    await this._zoomIn()
-    await this._mouseDrag(210, 470)
-
-    await this.page.screenshot({
-      path: photoPath,
+      path: screenshotFilePath,
       fullPage: true,
     })
-    log(`截圖成功(台中): ${photoPath}`)
+
+    log(`截圖成功(${item.location}): ${screenshotFilePath}`)
+    await this.page.waitFor(500)
   }
 
   async _closeBrowser() {
@@ -117,8 +115,9 @@ class GetAirBoxSnapSnapshot {
     await this.page.waitFor(500)
   }
 
-  async _zoomIn() {
-    const zoomInSelector = 'button[aria-label="放大"]'
+  async _zoom(type = '+') {
+    const label = type == '-' ? '縮小' : '放大'
+    const zoomInSelector = `button[aria-label="${label}"]`
     await this.page.evaluate(zoomInSelector => { document.querySelector(zoomInSelector).click() }, zoomInSelector)
     await this.page.waitFor(500)
   }

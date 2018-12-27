@@ -10,7 +10,7 @@ class App {
   async start() {
     await this.setupConfig()
     await GetAirBoxSnapSnapshot.start()
-    await GetCwbData.start()
+    // await GetCwbData.start()
   }
 
   async setupConfig() {

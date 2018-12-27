@@ -4,6 +4,18 @@
     "executablePath": "/usr/bin/google-chrome",
     "screenShotStorePath": "/foo/bar"
   },
+  "airbox": {
+    "screenshot": [
+      {
+        "location": "全台",
+        "actions": [[0, -100]]
+      },
+      {
+        "location": "台中",
+        "actions": ["+", "+", "+", [210, 470]]
+      }
+    ]
+  },
   "lineNotify": {
     "tokens": [
       "token"
