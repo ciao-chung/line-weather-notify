@@ -55665,6 +55665,10 @@ function () {
                 return __WEBPACK_IMPORTED_MODULE_2_Jobs_GetAirBoxSnapSnapshot__["a" /* default */].start();
 
               case 4:
+                _context.next = 6;
+                return __WEBPACK_IMPORTED_MODULE_3_Jobs_GetCwbData__["a" /* default */].start();
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -97399,7 +97403,7 @@ function () {
   return GetCwbData;
 }();
 
-/* unused harmony default export */ var _unused_webpack_default_export = (new GetCwbData());
+/* harmony default export */ __webpack_exports__["a"] = (new GetCwbData());
 
 /***/ }),
 /* 690 */
