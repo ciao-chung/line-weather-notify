@@ -31,8 +31,16 @@ node prod/line-weather-notify --config=/path/to/config/file
       "token"
     ]
   },
+  "airbox": {
+    "screenshot": [
+      airboxLocation,
+      airboxLocation,
+      airboxLocation,
+    ]
+  },
   "cwb": {
     "city": [
+      cityItem,
       cityItem,
       cityItem,
     ],
@@ -47,9 +55,27 @@ node prod/line-weather-notify --config=/path/to/config/file
   - screenShotStorePath(required): String, 截圖暫存路徑
 - lineNotify:
   - tokens(required): Array, Line Notify要通知的對象(可多個)
+- airbox:
+  - screenshot(Required): Array, airboxLocation陣列, 可以設定airbox中要截圖的區域
 - cwb: 中央氣象局API設定
   - city: Array, cityItem陣列, 設定需要做預報的縣市及其鄉鎮
   - token(required): String, API token
+
+**airboxLocation**
+
+```json
+{
+  "location": "台中",
+  "actions": ["+", "+", "+", [210, 470]]
+}
+```
+
+- location(Required): String, 區域名稱, 此名稱將會顯示在line通知上
+- actions(Optional): Array, 操作chrome來控制airbox中的移動/拖曳動作(建議開啟debug模式確認位置), 移動/操作完成後將進行截圖,下列為動作種類說明
+  - +: 放大地圖
+  - -: 縮小地圖
+  - [Number, Number]: 移動地圖(以目前頁面為中心移動), 第一個為x軸, 第二個為y軸
+
 
 
 **cityItem**
@@ -96,3 +122,11 @@ node prod/line-weather-notify --config=/path/to/config/file
 可以清楚的看到puppeteer操作chrome的過程
 
 [Demo影片](https://youtu.be/ZzRQTEWbX0c)
+
+## 鄉鎮氣象預報
+
+可指定多個鄉鎮
+
+並取得每個鄉鎮的氣象資料再發出Line通知
+
+![Demo](https://goo.gl/WrhKGn)

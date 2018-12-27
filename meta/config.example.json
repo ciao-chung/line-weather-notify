@@ -4,6 +4,11 @@
     "executablePath": "/usr/bin/google-chrome",
     "screenShotStorePath": "/foo/bar"
   },
+  "lineNotify": {
+    "tokens": [
+      "token"
+    ]
+  },
   "airbox": {
     "screenshot": [
       {
@@ -14,11 +19,6 @@
         "location": "台中",
         "actions": ["+", "+", "+", [210, 470]]
       }
-    ]
-  },
-  "lineNotify": {
-    "tokens": [
-      "token"
     ]
   },
   "cwb": {
