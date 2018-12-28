@@ -62013,7 +62013,7 @@ function () {
             switch (_context5.prev = _context5.next) {
               case 0:
                 if (!Array.isArray(item.actions)) {
-                  _context5.next = 33;
+                  _context5.next = 37;
                   break;
                 }
 
@@ -62025,7 +62025,7 @@ function () {
 
               case 6:
                 if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                  _context5.next = 19;
+                  _context5.next = 23;
                   break;
                 }
 
@@ -62040,82 +62040,94 @@ function () {
                 return this._zoom(action);
 
               case 11:
-                return _context5.abrupt("continue", 16);
+                return _context5.abrupt("continue", 20);
 
               case 12:
-                if (!Array.isArray(action)) {
+                if (!(action == 'reload')) {
                   _context5.next = 16;
                   break;
                 }
 
                 _context5.next = 15;
-                return this._mouseDrag(action[0], action[1]);
+                return this._reload();
 
               case 15:
-                return _context5.abrupt("continue", 16);
+                return _context5.abrupt("continue", 20);
 
               case 16:
+                if (!Array.isArray(action)) {
+                  _context5.next = 20;
+                  break;
+                }
+
+                _context5.next = 19;
+                return this._mouseDrag(action[0], action[1]);
+
+              case 19:
+                return _context5.abrupt("continue", 20);
+
+              case 20:
                 _iteratorNormalCompletion2 = true;
                 _context5.next = 6;
                 break;
 
-              case 19:
-                _context5.next = 25;
+              case 23:
+                _context5.next = 29;
                 break;
 
-              case 21:
-                _context5.prev = 21;
+              case 25:
+                _context5.prev = 25;
                 _context5.t0 = _context5["catch"](4);
                 _didIteratorError2 = true;
                 _iteratorError2 = _context5.t0;
 
-              case 25:
-                _context5.prev = 25;
-                _context5.prev = 26;
+              case 29:
+                _context5.prev = 29;
+                _context5.prev = 30;
 
                 if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
                   _iterator2.return();
                 }
 
-              case 28:
-                _context5.prev = 28;
+              case 32:
+                _context5.prev = 32;
 
                 if (!_didIteratorError2) {
-                  _context5.next = 31;
+                  _context5.next = 35;
                   break;
                 }
 
                 throw _iteratorError2;
 
-              case 31:
-                return _context5.finish(28);
+              case 35:
+                return _context5.finish(32);
 
-              case 32:
-                return _context5.finish(25);
+              case 36:
+                return _context5.finish(29);
 
-              case 33:
+              case 37:
                 screenshotFilePath = pathResolve(appConfig.puppeteer.screenShotStorePath, "line-weather-notify-screenshot-".concat(__WEBPACK_IMPORTED_MODULE_1_uuid_v4___default()(), ".png"));
                 this.screenShotPhotos.push({
                   title: "\n".concat(this._getComputedTime(now()), " ").concat(item.location, "\u7A7A\u6C23\u54C1\u8CEA"),
                   path: screenshotFilePath
                 });
-                _context5.next = 37;
+                _context5.next = 41;
                 return this.page.screenshot({
                   path: screenshotFilePath,
                   fullPage: true
                 });
 
-              case 37:
+              case 41:
                 log("\u622A\u5716\u6210\u529F(".concat(item.location, "): ").concat(screenshotFilePath));
-                _context5.next = 40;
+                _context5.next = 44;
                 return this.page.waitFor(500);
 
-              case 40:
+              case 44:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, this, [[4, 21, 25, 33], [26,, 28, 32]]);
+        }, _callee5, this, [[4, 25, 29, 37], [30,, 32, 36]]);
       }));
 
       function _takeScreenshot(_x) {
@@ -62125,9 +62137,9 @@ function () {
       return _takeScreenshot;
     }()
   }, {
-    key: "_closeBrowser",
+    key: "_reload",
     value: function () {
-      var _closeBrowser2 = _asyncToGenerator(
+      var _reload2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee6() {
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -62135,10 +62147,43 @@ function () {
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.next = 2;
-                return this.page.close();
+                return this.page.reload({
+                  waitUntil: 'networkidle0'
+                });
 
               case 2:
                 _context6.next = 4;
+                return this._closeLightBox();
+
+              case 4:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function _reload() {
+        return _reload2.apply(this, arguments);
+      }
+
+      return _reload;
+    }()
+  }, {
+    key: "_closeBrowser",
+    value: function () {
+      var _closeBrowser2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee7() {
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return this.page.close();
+
+              case 2:
+                _context7.next = 4;
                 return this.browser.close();
 
               case 4:
@@ -62146,10 +62191,10 @@ function () {
 
               case 5:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee7, this);
       }));
 
       function _closeBrowser() {
@@ -62163,54 +62208,50 @@ function () {
     value: function () {
       var _mouseDrag2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee7(x, y) {
-        var innerWidth, innerHeight, mouse;
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      regeneratorRuntime.mark(function _callee8(x, y) {
+        var target, body, mouse;
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
-                _context7.next = 2;
-                return this.page.evaluate(function () {
-                  return window.innerWidth;
-                });
+                _context8.next = 2;
+                return this.page.$('body');
 
               case 2:
-                innerWidth = _context7.sent;
-                _context7.next = 5;
-                return this.page.evaluate(function () {
-                  return window.innerHeight;
-                });
+                target = _context8.sent;
+                _context8.next = 5;
+                return target.boundingBox();
 
               case 5:
-                innerHeight = _context7.sent;
+                body = _context8.sent;
                 mouse = this.page.mouse;
-                _context7.next = 9;
-                return mouse.move(innerWidth / 2, innerHeight / 2);
+                _context8.next = 9;
+                return mouse.move(body.x + body.width / 2, body.y + body.height / 2);
 
               case 9:
-                _context7.next = 11;
+                _context8.next = 11;
                 return mouse.down();
 
               case 11:
-                _context7.next = 13;
-                return mouse.move(innerWidth / 2 + x, innerHeight / 2 + y, {
-                  steps: 10
+                _context8.next = 13;
+                return mouse.move(x, y, {
+                  steps: 20
                 });
 
               case 13:
-                _context7.next = 15;
+                _context8.next = 15;
                 return mouse.up();
 
               case 15:
-                _context7.next = 17;
+                _context8.next = 17;
                 return this.page.waitFor(500);
 
               case 17:
               case "end":
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7, this);
+        }, _callee8, this);
       }));
 
       function _mouseDrag(_x2, _x3) {
@@ -62224,33 +62265,33 @@ function () {
     value: function () {
       var _zoom2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee8() {
+      regeneratorRuntime.mark(function _callee9() {
         var type,
             label,
             zoomInSelector,
-            _args8 = arguments;
-        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            _args9 = arguments;
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                type = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : '+';
+                type = _args9.length > 0 && _args9[0] !== undefined ? _args9[0] : '+';
                 label = type == '-' ? '縮小' : '放大';
                 zoomInSelector = "button[aria-label=\"".concat(label, "\"]");
-                _context8.next = 5;
+                _context9.next = 5;
                 return this.page.evaluate(function (zoomInSelector) {
                   document.querySelector(zoomInSelector).click();
                 }, zoomInSelector);
 
               case 5:
-                _context8.next = 7;
+                _context9.next = 7;
                 return this.page.waitFor(500);
 
               case 7:
               case "end":
-                return _context8.stop();
+                return _context9.stop();
             }
           }
-        }, _callee8, this);
+        }, _callee9, this);
       }));
 
       function _zoom() {
@@ -62264,79 +62305,79 @@ function () {
     value: function () {
       var _sendPhotos2 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee9() {
+      regeneratorRuntime.mark(function _callee10() {
         var _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, photo;
 
-        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+        return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
                 _iteratorNormalCompletion3 = true;
                 _didIteratorError3 = false;
                 _iteratorError3 = undefined;
-                _context9.prev = 3;
+                _context10.prev = 3;
                 _iterator3 = this.screenShotPhotos[Symbol.iterator]();
 
               case 5:
                 if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-                  _context9.next = 15;
+                  _context10.next = 15;
                   break;
                 }
 
                 photo = _step3.value;
                 log("\u767C\u9001\u5716\u7247: ".concat(photo.path, "\n"));
-                _context9.next = 10;
+                _context10.next = 10;
                 return __WEBPACK_IMPORTED_MODULE_3_Libs_LineNotify__["a" /* default */].send(photo.title, photo.path);
 
               case 10:
-                _context9.next = 12;
+                _context10.next = 12;
                 return execAsync("rm -rf ".concat(photo.path));
 
               case 12:
                 _iteratorNormalCompletion3 = true;
-                _context9.next = 5;
+                _context10.next = 5;
                 break;
 
               case 15:
-                _context9.next = 21;
+                _context10.next = 21;
                 break;
 
               case 17:
-                _context9.prev = 17;
-                _context9.t0 = _context9["catch"](3);
+                _context10.prev = 17;
+                _context10.t0 = _context10["catch"](3);
                 _didIteratorError3 = true;
-                _iteratorError3 = _context9.t0;
+                _iteratorError3 = _context10.t0;
 
               case 21:
-                _context9.prev = 21;
-                _context9.prev = 22;
+                _context10.prev = 21;
+                _context10.prev = 22;
 
                 if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
                   _iterator3.return();
                 }
 
               case 24:
-                _context9.prev = 24;
+                _context10.prev = 24;
 
                 if (!_didIteratorError3) {
-                  _context9.next = 27;
+                  _context10.next = 27;
                   break;
                 }
 
                 throw _iteratorError3;
 
               case 27:
-                return _context9.finish(24);
+                return _context10.finish(24);
 
               case 28:
-                return _context9.finish(21);
+                return _context10.finish(21);
 
               case 29:
               case "end":
-                return _context9.stop();
+                return _context10.stop();
             }
           }
-        }, _callee9, this, [[3, 17, 21, 29], [22,, 24, 28]]);
+        }, _callee10, this, [[3, 17, 21, 29], [22,, 24, 28]]);
       }));
 
       function _sendPhotos() {

@@ -1,0 +1,12 @@
+{
+  "name": "line-weather-notify",
+  "version": "1.0.0",
+  "description": "Line氣象通知",
+  "main": "index.js",
+  "repository": "https://github.com/ciao-chung/line-weather-notify",
+  "author": "Ciao Chung <ciao0958@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "line-weather-notify": "./index.js"
+  }
+}

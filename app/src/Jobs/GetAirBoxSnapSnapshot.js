@@ -74,6 +74,11 @@ class GetAirBoxSnapSnapshot {
           continue
         }
 
+        if(action == 'reload') {
+          await this._reload()
+          continue
+        }
+
         if(Array.isArray(action)) {
           await this._mouseDrag(action[0], action[1])
           continue
@@ -96,6 +101,14 @@ class GetAirBoxSnapSnapshot {
     await this.page.waitFor(500)
   }
 
+  async _reload() {
+    await this.page.reload({
+      waitUntil: 'networkidle0',
+    })
+
+    await this._closeLightBox()
+  }
+
   async _closeBrowser() {
     await this.page.close()
     await this.browser.close()
@@ -103,13 +116,13 @@ class GetAirBoxSnapSnapshot {
   }
 
   async _mouseDrag(x, y) {
-    const innerWidth = await this.page.evaluate(() => window.innerWidth)
-    const innerHeight = await this.page.evaluate(() => window.innerHeight)
+    const target = await this.page.$('body')
+    const body = await target.boundingBox()
     const mouse = this.page.mouse
-    await mouse.move(innerWidth/2, innerHeight/2)
+    await mouse.move(body.x+body.width/2, body.y+body.height/2)
     await mouse.down()
-    await mouse.move(innerWidth/2+x, innerHeight/2+y, {
-      steps: 10
+    await mouse.move(x, y, {
+      steps: 20
     })
     await mouse.up()
     await this.page.waitFor(500)
