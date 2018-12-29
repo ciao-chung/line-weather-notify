@@ -4,14 +4,20 @@
 
 ## Demo影片
 
-[Demo影片](https://www.youtube.com/watch?v=4YhCE8Zn9-I)
+[Demo影片](https://youtu.be/MxgJvlcGCiA)
+
+## 安裝
+
+```bash
+yarn global add line-weather-notify
+```
 
 ## 執行
 
 > 只要指定JSON設定檔即可執行
 
 ```bash
-node prod/line-weather-notify --config=/path/to/config/file
+line-weather-notify --config=/path/to/config/file
 ```
 
 透過cron tab可以設定成固定時間通知
