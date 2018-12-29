@@ -136,4 +136,4 @@ line-weather-notify --config=/path/to/config/file
 
 並取得每個鄉鎮的氣象資料再發出Line通知
 
-![Demo](https://goo.gl/WrhKGn)
+![Demo](https://goo.gl/d5Xieg)
