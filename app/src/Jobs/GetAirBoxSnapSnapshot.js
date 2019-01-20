@@ -13,8 +13,14 @@ class GetAirBoxSnapSnapshot {
   }
   async start() {
     await this._launchBrowser()
-    await this._gotoAirBoxPage()
-    await this._closeLightBox()
+    try {
+      await this._gotoAirBoxPage()
+      await this._closeLightBox()
+    } catch(error) {
+      log(error, 'yellow')
+      log('空氣盒子導向失敗, 已略過空氣盒子截圖服務', 'yellow')
+      return
+    }
     for(const item of appConfig.airbox.screenshot) {
       await this._takeScreenshot(item)
     }
@@ -43,7 +49,7 @@ class GetAirBoxSnapSnapshot {
     await this.page.setViewport(this.baseViewPort)
     log('導向空氣盒子')
     await this.page.goto(this.url, {
-      timeout: 40000,
+      timeout: 10000,
       waitUntil: 'networkidle0',
     })
     await this.page.waitFor(1000)
