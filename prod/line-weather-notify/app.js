@@ -61782,83 +61782,95 @@ function () {
                 return this._launchBrowser();
 
               case 2:
-                _context.next = 4;
+                _context.prev = 2;
+                _context.next = 5;
                 return this._gotoAirBoxPage();
 
-              case 4:
-                _context.next = 6;
+              case 5:
+                _context.next = 7;
                 return this._closeLightBox();
 
-              case 6:
+              case 7:
+                _context.next = 14;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+                log(_context.t0, 'yellow');
+                log('空氣盒子導向失敗, 已略過空氣盒子截圖服務', 'yellow');
+                return _context.abrupt("return");
+
+              case 14:
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context.prev = 9;
+                _context.prev = 17;
                 _iterator = appConfig.airbox.screenshot[Symbol.iterator]();
 
-              case 11:
+              case 19:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 18;
+                  _context.next = 26;
                   break;
                 }
 
                 item = _step.value;
-                _context.next = 15;
+                _context.next = 23;
                 return this._takeScreenshot(item);
 
-              case 15:
+              case 23:
                 _iteratorNormalCompletion = true;
-                _context.next = 11;
+                _context.next = 19;
                 break;
 
-              case 18:
-                _context.next = 24;
+              case 26:
+                _context.next = 32;
                 break;
 
-              case 20:
-                _context.prev = 20;
-                _context.t0 = _context["catch"](9);
+              case 28:
+                _context.prev = 28;
+                _context.t1 = _context["catch"](17);
                 _didIteratorError = true;
-                _iteratorError = _context.t0;
+                _iteratorError = _context.t1;
 
-              case 24:
-                _context.prev = 24;
-                _context.prev = 25;
+              case 32:
+                _context.prev = 32;
+                _context.prev = 33;
 
                 if (!_iteratorNormalCompletion && _iterator.return != null) {
                   _iterator.return();
                 }
 
-              case 27:
-                _context.prev = 27;
+              case 35:
+                _context.prev = 35;
 
                 if (!_didIteratorError) {
-                  _context.next = 30;
+                  _context.next = 38;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 30:
-                return _context.finish(27);
+              case 38:
+                return _context.finish(35);
 
-              case 31:
-                return _context.finish(24);
+              case 39:
+                return _context.finish(32);
 
-              case 32:
-                _context.next = 34;
+              case 40:
+                _context.next = 42;
                 return this._closeBrowser();
 
-              case 34:
-                _context.next = 36;
+              case 42:
+                _context.next = 44;
                 return this._sendPhotos();
 
-              case 36:
+              case 44:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[9, 20, 24, 32], [25,, 27, 31]]);
+        }, _callee, this, [[2, 9], [17, 28, 32, 40], [33,, 35, 39]]);
       }));
 
       function start() {
@@ -61930,7 +61942,7 @@ function () {
                 log('導向空氣盒子');
                 _context3.next = 8;
                 return this.page.goto(this.url, {
-                  timeout: 40000,
+                  timeout: 10000,
                   waitUntil: 'networkidle0'
                 });
 
