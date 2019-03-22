@@ -93,6 +93,7 @@ class GetAirBoxSnapSnapshot {
     }
 
     const screenshotFilePath = pathResolve(appConfig.puppeteer.screenShotStorePath, `line-weather-notify-screenshot-${uuid()}.png`)
+    mkdir('-p', appConfig.puppeteer.screenShotStorePath)
     this.screenShotPhotos.push({
       title: `\n${this._getComputedTime(now())} ${item.location}空氣品質`,
       path: screenshotFilePath,

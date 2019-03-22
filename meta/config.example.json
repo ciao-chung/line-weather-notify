@@ -5,7 +5,7 @@
     "screenShotStorePath": "/foo/bar"
   },
   "lineNotify": {
-    "tokens": [
+    "token": [
       "token"
     ]
   },

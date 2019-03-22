@@ -1,6 +1,6 @@
 {
   "name": "line-weather-notify",
-  "version": "1.0.4",
+  "version": "1.0.1",
   "description": "Line氣象通知",
   "main": "index.js",
   "repository": "https://github.com/ciao-chung/line-weather-notify",
